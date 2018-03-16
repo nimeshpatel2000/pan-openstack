@@ -1,0 +1,7 @@
+parameters:
+  mgmt_network: external
+  pan_image: PA-VM-KVM-8.1.0
+  pan_flavor: pa.vm.50
+  server_image: cirros-0.3.5-x86_64-disk
+  server_flavor: m1.tiny
+  server_key: npatel

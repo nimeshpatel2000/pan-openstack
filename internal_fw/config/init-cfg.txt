@@ -1,0 +1,12 @@
+type=dhcp-client
+hostname=PA-VM-1
+ip-address=
+default-gateway=
+netmask=
+hostname=abc
+dns-primary=8.8.8.8
+dhcp-send-hostname=yes
+dhcp-send-client-id=yes
+dhcp-accept-server-hostname=yes
+dhcp-accept-server-domain=yes
+
