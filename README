@@ -1,0 +1,75 @@
+Complete set of bootstrap files and heat templates to validate deployment of the Palo Alto Networks VM Series firewall on an Openstack enviroment
+
+Internal Firewall Template
+
+For showing network segementation between two private networks. Traffic is allowed from the pan_trust_net to pan_untrust_net but blocked in the opposite direction. ping from server_trust to server_untrust, will be succesfull. Ping in the opposite direction will fail.
+
+The template performs the following:
+
+1.	Creates security groups for the management interface and traffic interfaces
+2.	Creates pan_trust_net and pan_untrust_net networks and subnets
+3.	Creates network ports for firewall traffic interfaces, applies "allow_any" security group and static IPs
+4.	Creates the firewall instance
+5.	Creates a server, server_trust, on the pan_trust_net network
+6.	Creates a server, server_untrust on the pan_untrust_net network
+
+Pre-requisites:
+
+1.	The template assumes there is network already created for the management network which has internet access
+2.	Appropriate flavor has been created
+3.	If you wish to license the firewall, add the licence authcode to the /internal_fw/license/authcodes file.
+4.	Edit the config drive file path to one that matches the location of your bootstrap files
+5.	Update the /internal_fw/heat/internal_fw_env.yaml file (see below) to match your environment
+6.	If the network addresses need to be changed, IP addresses in the bootstrap.xml file need to be changed as well
+
+Environment variables:
+
+  mgmt_network: external
+  pan_image: PA-VM-KVM-8.1.0
+  pan_flavor: pa.vm.50
+  server_image: cirros-0.3.5-x86_64-disk
+  server_flavor: m1.tiny
+  server_key: npatel
+
+To execute:
+
+cd (path to files)/internal_fw/heat
+openstack stack create internal_fw -e internal_fw_env.yaml -t internal_fw.yaml
+
+Basic Gateway Template
+
+For showing internet gateway. Traffic is allowed from pan_trust_net to the external network, but blocked in the opposite dirction. 
+
+The template performs the following:
+
+1.	Creates security groups for the management interface and traffic interfaces
+2.	Creates pan_trust_net network and subnet
+3.	Creates network ports for firewall traffic interfaces with "allow_any" security group and static IP for the trust side interface
+4.	Creates the firewall instance
+5.	Creates a server, server_trust, on the pan_trust_net network
+
+Pre-requisites:
+
+1.	The template assumes there is network already created for the management network which has internet access
+2.	A network exists for internet access
+3.	Appropriate flavor has been created
+4.	If you wish to license the firewall, add the licence authcode to the /basic_gw /license/authcodes file.
+5.	Edit the config drive file path to one that matches the location of your bootstrap files
+6.	Update the /internal_fw/heat/basic_gw_env.yaml file (see below) to match your environment
+7.	If the network addresses need to be changed, IP addresses in the bootstrap.xml file need to be changed as well
+
+Environment variables:
+
+parameters:
+  mgmt_network: external
+  external_network: external
+  pan_image: PA-VM-KVM-8.1.0
+  pan_flavor: pa.vm.50
+  server_image: cirros-0.3.5-x86_64-disk
+  server_flavor: m1.tiny
+  server_key: npatel
+
+To execute:
+
+cd (path to files)/basic_gw/heat
+openstack stack create basic_gw -e basic_gw_env.yaml -t basic_gw.yaml
