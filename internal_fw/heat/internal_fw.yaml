@@ -124,9 +124,9 @@ resources:
       user_data_format: RAW
       config_drive: true
       personality:
-        /config/init-cfg.txt: {get_file: "/home/npatel/internal_fw/config/init-cfg.txt"}
-        /config/bootstrap.xml: {get_file: "/home/npatel/internal_fw/config/bootstrap.xml"}
-        /license/authcodes: {get_file: "/home/npatel/internal_fw/license/authcodes"}
+        /config/init-cfg.txt: {get_file: "/home/user/internal_fw/config/init-cfg.txt"}
+        /config/bootstrap.xml: {get_file: "/home/user/internal_fw/config/bootstrap.xml"}
+        /license/authcodes: {get_file: "/home/user/internal_fw/license/authcodes"}
 
   server_trust:
     type: OS::Nova::Server

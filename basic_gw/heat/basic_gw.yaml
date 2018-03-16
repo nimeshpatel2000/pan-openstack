@@ -112,9 +112,9 @@ resources:
       user_data_format: RAW
       config_drive: true
       personality:
-        /config/init-cfg.txt: {get_file: "/home/npatel/basic_gw/config/init-cfg.txt"}
-        /config/bootstrap.xml: {get_file: "/home/npatel/basic_gw/config/bootstrap.xml"}
-#        /license/authcodes: {get_file: "/home/npatel/basic_gw/license/authcodes"}
+        /config/init-cfg.txt: {get_file: "/home/user/basic_gw/config/init-cfg.txt"}
+        /config/bootstrap.xml: {get_file: "/home/user/basic_gw/config/bootstrap.xml"}
+        /license/authcodes: {get_file: "/home/user/basic_gw/license/authcodes"}
 
   server_trust:
     type: OS::Nova::Server
